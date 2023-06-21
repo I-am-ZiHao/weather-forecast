@@ -8,6 +8,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ["cdn.weatherapi.com"],
+  },
 };
 
 module.exports = nextConfig;

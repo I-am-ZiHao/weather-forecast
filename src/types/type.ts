@@ -9,6 +9,13 @@ export interface CurrentWeatherDataType {
     temp_f: number;
     condition: {
       text: string;
+      icon: string;
     };
+  };
+}
+
+export interface ErrorDataType {
+  error: {
+    message: string;
   };
 }

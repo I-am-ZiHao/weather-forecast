@@ -2,7 +2,7 @@ import { memo } from "react";
 import { CryFace } from "../../public/icons";
 
 interface ErrorMessageProps {
-  message: string;
+  message?: string;
 }
 
 // TODO: display error message from response
@@ -10,7 +10,7 @@ const ErrorMessage = memo<ErrorMessageProps>(({ message }) => {
   return (
     <>
       <CryFace />
-      {message}
+      {message || "No matching location found."}
     </>
   );
 });
