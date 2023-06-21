@@ -26,7 +26,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         {...props}
       />
 
-      {/* loading spinner */}
+      {/* loading spinner on the right hand side */}
       {isLoading && (
         <div className="absolute inset-y-0 sm:right-3 right-1 flex items-center pointer-events-none text-white">
           <svg className="animate-spin h-6 w-6 mr-3 ..." viewBox="0 0 24 24">

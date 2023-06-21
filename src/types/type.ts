@@ -1,4 +1,20 @@
-export interface CurrentWeatherDataType {
+type WeatherConditionType = {
+  text: string;
+  icon: string;
+};
+
+export interface ForecastDayDataType {
+  date: string;
+  day: {
+    maxtemp_c: number;
+    mintemp_c: number;
+    avgtemp_c: number;
+    daily_chance_of_rain: number;
+    condition: WeatherConditionType;
+  };
+}
+
+export interface WeatherDataType {
   location: {
     name: string;
     country: string;
@@ -6,16 +22,9 @@ export interface CurrentWeatherDataType {
   };
   current: {
     temp_c: number;
-    temp_f: number;
-    condition: {
-      text: string;
-      icon: string;
-    };
+    condition: WeatherConditionType;
   };
-}
-
-export interface ErrorDataType {
-  error: {
-    message: string;
+  forecast: {
+    forecastday: ForecastDayDataType[];
   };
 }
