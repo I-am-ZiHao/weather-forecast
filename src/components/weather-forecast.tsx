@@ -123,7 +123,6 @@ const WeatherForecast = () => {
 
       if (result.success) {
         setWeatherData(result.data);
-        console.log("result.data", result.data);
         setErrorMessage(undefined);
       } else {
         setWeatherData(undefined);

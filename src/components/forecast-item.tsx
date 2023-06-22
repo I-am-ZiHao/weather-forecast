@@ -17,7 +17,7 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
   const { condition, daily_chance_of_rain, maxtemp_c, mintemp_c } = data.day;
 
   return (
-    <div className="w-full px-8 py-4 flex justify-between items-center flex-wrap gap-3 bg-[#34495E] rounded-lg">
+    <div className="w-full px-8 py-4 flex justify-between items-center flex-wrap gap-3 bg-[#34495E] opacity-80 rounded-lg ease-in-out duration-500 hover:scale-105 hover:opacity-100">
       {/* date */}
       <div className="sm:w-[20%] w-full">
         <Label content={data.date} />
@@ -37,9 +37,9 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
 
       {/* mix/max temp */}
       <div className="w-max flex gap-3 items-center">
-        {normalizeTemp(mintemp_c)}
+        <PlainText content={normalizeTemp(mintemp_c)} />
         <StatusBar />
-        {normalizeTemp(maxtemp_c)}
+        <PlainText content={normalizeTemp(maxtemp_c)} />
       </div>
     </div>
   );

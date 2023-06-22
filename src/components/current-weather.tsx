@@ -17,7 +17,7 @@ const CurrentWeather = memo<CurrentWeatherProps>(({ data, isLoading }) => {
   const { temp_c, condition } = data.current;
 
   return (
-    <div className="w-max py-8 px-16 flex flex-col items-center gap-3 bg-[#34495E] rounded-lg">
+    <div className="w-max max-w-full py-8 px-16 flex flex-col items-center gap-3 bg-[#34495E] rounded-lg">
       {/* city */}
       <Title2 content={data.location.name} />
 
