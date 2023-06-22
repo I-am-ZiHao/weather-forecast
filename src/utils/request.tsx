@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 interface SendRequestProps {
   url: RequestInfo | URL;
   init?: RequestInit | undefined;
@@ -11,42 +13,47 @@ type ResponseType<T> = {
 };
 
 export const useRequest = () => {
-  const sendRequest = async <T,>({
-    url,
-    init,
-    cache,
-  }: SendRequestProps): Promise<ResponseType<T>> => {
-    let output: ResponseType<T> = { success: false };
+  // T implies the type of the expected data
+  const sendRequest = useCallback(
+    async <T,>({
+      url,
+      init,
+      cache,
+    }: SendRequestProps): Promise<ResponseType<T>> => {
+      let output: ResponseType<T> = { success: false };
 
-    try {
-      const result = await fetch(
-        url,
-        init ?? {
-          method: "GET",
-          cache: cache ?? "no-cache",
+      try {
+        const result = await fetch(
+          url,
+          init ?? {
+            method: "GET",
+            cache: cache ?? "no-cache",
+          }
+        );
+
+        const response = await result.json();
+
+        if ("error" in response) {
+          output = {
+            success: false,
+            errorMessage: response?.error.message,
+          };
+        } else {
+          output = {
+            success: true,
+            data: response,
+          };
         }
-      );
-
-      const response = await result.json();
-      if ("error" in response) {
+      } catch (error) {
         output = {
           success: false,
-          errorMessage: response?.error.message,
-        };
-      } else {
-        output = {
-          success: true,
-          data: response,
+          errorMessage: (error as any)?.message,
         };
       }
-    } catch (error) {
-      output = {
-        success: false,
-        errorMessage: (error as any)?.message,
-      };
-    }
-    return output;
-  };
+      return output;
+    },
+    []
+  );
 
   return {
     sendRequest,

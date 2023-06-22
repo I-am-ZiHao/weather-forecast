@@ -9,7 +9,7 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ isLoading, ...props }, ref) => (
-    <div className="relative">
+    <div className="relative animate-fadeInUp">
       {/* search icon on the left hand side */}
       <div className="absolute inset-y-0 sm:left-3 left-1 flex items-center pl-3 pointer-events-none">
         <SearchIcon />

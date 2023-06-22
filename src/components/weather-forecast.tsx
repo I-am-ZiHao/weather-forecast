@@ -1,12 +1,13 @@
 "use client";
 
-import { KeyboardEvent, useRef, useState } from "react";
+import { KeyboardEvent, useCallback, useRef, useState } from "react";
 import SearchInput from "./search-input";
 import ErrorMessage from "./error-message";
 import { WeatherDataType } from "@/types/type";
 import CurrentWeather from "./current-weather";
 import { useRequest } from "@/utils/request";
 import ForecastList from "./forecast-list";
+import { throttle } from "@/utils/utils";
 
 const mockData: WeatherDataType = {
   location: {
@@ -105,6 +106,7 @@ const mockData: WeatherDataType = {
   },
 };
 
+// TODO: race condition
 const WeatherForecast = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { sendRequest } = useRequest();
@@ -114,32 +116,33 @@ const WeatherForecast = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // triggered by Enter
-  const onEnterSearchTerm = async (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      setIsLoading(true);
-      const result = await sendRequest<WeatherDataType>({
-        url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${inputRef.current?.value}&days=6&aqi=no&alerts=no`,
-      });
+  const searchWeather = useCallback(
+    async (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        setIsLoading(true);
+        const result = await sendRequest<WeatherDataType>({
+          url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${inputRef.current?.value}&days=6&aqi=no&alerts=no`,
+        });
 
-      if (result.success) {
-        setWeatherData(result.data);
-        setErrorMessage(undefined);
-      } else {
-        setWeatherData(undefined);
-        setErrorMessage(result.errorMessage);
+        if (result.success) {
+          setWeatherData(result.data);
+          setErrorMessage(undefined);
+        } else {
+          setWeatherData(undefined);
+          setErrorMessage(result.errorMessage);
+        }
+        setIsLoading(false);
       }
-      setIsLoading(false);
-    }
-  };
+    },
+    [sendRequest]
+  );
+
+  const onKeyDown = useCallback(throttle(searchWeather, 1000), [searchWeather]);
 
   return (
     // container with max-width
     <div className="max-w-5xl w-full sm:px-10 px-5 grow sm:pt-32 pt-24 pb-20">
-      <SearchInput
-        ref={inputRef}
-        onKeyDown={onEnterSearchTerm}
-        isLoading={isLoading}
-      />
+      <SearchInput ref={inputRef} onKeyDown={onKeyDown} isLoading={isLoading} />
 
       {/* info section */}
       <div className="w-full py-16 flex flex-col items-center gap-2">
