@@ -23,6 +23,8 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         placeholder="Search City"
         required
         ref={ref}
+        // disable the input while fetching data
+        disabled={isLoading}
         {...props}
       />
 

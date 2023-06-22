@@ -106,7 +106,6 @@ const mockData: WeatherDataType = {
   },
 };
 
-// TODO: race condition
 const WeatherForecast = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { sendRequest } = useRequest();
@@ -115,29 +114,31 @@ const WeatherForecast = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
 
-  // triggered by Enter
   const searchWeather = useCallback(
-    async (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter") {
-        setIsLoading(true);
-        const result = await sendRequest<WeatherDataType>({
-          url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${inputRef.current?.value}&days=6&aqi=no&alerts=no`,
-        });
+    throttle(async (cityName?: string) => {
+      setIsLoading(true);
+      const result = await sendRequest<WeatherDataType>({
+        url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${cityName}&days=6&aqi=no&alerts=no`,
+      });
 
-        if (result.success) {
-          setWeatherData(result.data);
-          setErrorMessage(undefined);
-        } else {
-          setWeatherData(undefined);
-          setErrorMessage(result.errorMessage);
-        }
-        setIsLoading(false);
+      if (result.success) {
+        setWeatherData(result.data);
+        setErrorMessage(undefined);
+      } else {
+        setWeatherData(undefined);
+        setErrorMessage(result.errorMessage);
       }
-    },
+      setIsLoading(false);
+    }, 1000),
     [sendRequest]
   );
 
-  const onKeyDown = useCallback(throttle(searchWeather, 1000), [searchWeather]);
+  // triggered by Enter
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      searchWeather(inputRef.current?.value);
+    }
+  };
 
   return (
     // container with max-width
