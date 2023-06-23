@@ -1,8 +1,13 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
-const inter = Poppins({ subsets: ["latin"], weight: "400" });
+// font settings
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
+// SEO
 export const metadata = {
   title: "Weather Forecast",
   description: "A weather forecast app made by Zi-Hao Lin",
@@ -28,9 +33,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         {/* nav bar */}
-        <nav className="fixed w-full top-0 left-0 bg-[#111319] shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px] z-10 p-5 text-white font-black sm:text-3xl text-2xl animate-fadeInDown">
+        <nav className="fixed w-full top-0 left-0 bg-[#111319] shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px] z-10 p-5 text-white font-bold sm:text-3xl text-2xl animate-fadeInDown">
           <h1 className="whitespace-nowrap">Weather Forecast</h1>
         </nav>
         {children}

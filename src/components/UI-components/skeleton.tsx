@@ -8,7 +8,9 @@ interface SkeletonProps {
 const Skeleton = memo(({ className }: SkeletonProps) => (
   <div
     className={twMerge(
-      `w-[280px] h-[220px] bg-[#FFFFFF21] rounded-lg animate-pulse ${className}`
+      `w-[280px] h-[220px] bg-[#FFFFFF21] rounded-lg animate-pulse ${
+        className ?? ""
+      }`
     )}
   />
 ));

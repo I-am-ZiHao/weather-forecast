@@ -1,15 +1,15 @@
-import { ForecastDayDataType } from "@/types/type";
+import { ForecastDayDataType } from "@/types/data";
 import { memo } from "react";
-import StatusBar from "./UI-components/status-bar";
-import Image from "next/image";
-import { Label, PlainText } from "./UI-components/typography";
-
-const normalizeTemp = (temp: number) => temp.toFixed(1);
+import StatusBar from "../UI-components/status-bar";
+import { Label, PlainText } from "../UI-components/typography";
+import { normalizeValue } from "@/utils/utils";
+import WeatherIcon from "../UI-components/weather-icon";
 
 interface ForecastItemProps {
   data: ForecastDayDataType;
 }
 
+// weather info for a single day
 const ForecastItem = memo<ForecastItemProps>(({ data }) => {
   if (!data) return null;
 
@@ -22,23 +22,18 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
         <Label content={data.date} />
       </div>
 
-      {/* icon & rain chance */}
+      {/* icon & rain chance & weather description */}
       <div className="sm:w-[40%] w-full flex flex-wrap gap-3 items-center">
-        <Image
-          src={`https:${condition.icon}`}
-          width={40}
-          height={40}
-          alt="weather icon"
-        />
+        <WeatherIcon src={condition.icon} />
         <Label content={`${daily_chance_of_rain}%`} />
         <PlainText content={condition.text} />
       </div>
 
       {/* mix & max temp */}
       <div className="w-max flex gap-3 items-center">
-        <PlainText content={normalizeTemp(mintemp_c)} />
+        <PlainText content={normalizeValue(mintemp_c)} />
         <StatusBar />
-        <PlainText content={normalizeTemp(maxtemp_c)} />
+        <PlainText content={normalizeValue(maxtemp_c)} />
       </div>
     </div>
   );

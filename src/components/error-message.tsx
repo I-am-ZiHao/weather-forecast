@@ -5,6 +5,7 @@ interface ErrorMessageProps {
   message?: string;
 }
 
+// display error message
 const ErrorMessage = memo<ErrorMessageProps>(({ message }) => {
   return (
     <>
