@@ -58,7 +58,7 @@ const Root = () => {
       <div className="w-full py-16 flex flex-col items-center gap-2">
         {/* <CurrentWeather data={mockData} isLoading={isLoading} />
         <CurrentWeatherDetails
-          data={filterHourData(mockData.forecast.forecastday[0].hour)}
+          data={filterDataByHour(mockData.forecast.forecastday[0].hour)}
           isLoading={isLoading}
         />
         <ForecastList

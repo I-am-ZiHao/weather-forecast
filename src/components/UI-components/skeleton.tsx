@@ -1,11 +1,10 @@
-import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface SkeletonProps {
   className?: string;
 }
 
-const Skeleton = memo(({ className }: SkeletonProps) => (
+const Skeleton = ({ className }: SkeletonProps) => (
   <div
     className={twMerge(
       `w-[280px] h-[220px] bg-[#FFFFFF21] rounded-lg animate-pulse ${
@@ -13,7 +12,7 @@ const Skeleton = memo(({ className }: SkeletonProps) => (
       }`
     )}
   />
-));
+);
 
 Skeleton.displayName = "Skeleton";
 

@@ -13,6 +13,14 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       keyframes: {
+        fadeIn: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
         fadeInUp: {
           "0%": {
             transform: "translateY(100%)",
@@ -45,6 +53,7 @@ module.exports = {
         },
       },
       animation: {
+        fadeIn: "fadeIn .3s ease-in",
         fadeInUp: "fadeInUp 1s ease-in",
         fadeInDown: "fadeInDown 1s ease-in",
         fadeInRight: "fadeInRight 1s ease-in",
