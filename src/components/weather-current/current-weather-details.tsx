@@ -3,7 +3,7 @@ import { memo } from "react";
 import { HighlightText, Label, PlainText } from "../UI-components/typography";
 import Skeleton from "../UI-components/skeleton";
 import { CommonProps } from "@/types/props";
-import { convertTimestampToLocalTime, normalizeValue } from "@/utils/utils";
+import { getTimeFromDateString, normalizeValue } from "@/utils/utils";
 import WeatherIcon from "../UI-components/weather-icon";
 
 interface CurrentWeatherDetailsProps extends CommonProps {
@@ -26,8 +26,8 @@ const CurrentWeatherDetails = memo<CurrentWeatherDetailsProps>(
       <div className="w-max max-w-full mt-4 overflow-x-auto no-scrollbar px-8 py-4 flex items-center justify-between gap-5 bg-[#34495E] rounded-lg animate-fadeInUp">
         {data.map((d) => (
           <div key={d.time} className="w-max flex flex-col items-center gap-2">
-            {/* time_epoch looks like 1687694400, do NOT display d.time here, since it isn't local time */}
-            <PlainText content={convertTimestampToLocalTime(d.time_epoch)} />
+            {/* time looks like "2023-06-24 18:00" */}
+            <PlainText content={getTimeFromDateString(d.time)} />
 
             {/* icon & rain chance */}
             <div className="w-max flex flex-col items-center gap-1">
