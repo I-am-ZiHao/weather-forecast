@@ -32,7 +32,10 @@ const Modal = ({ id, title, show, onClose, children }: ModalProps) => {
           <div className="w-full flex justify-between p-2">
             {/* title */}
             <div className="">
-              <Title2 content={title ?? ""} />
+              <Title2
+                content={title ?? ""}
+                className="text-white font-medium"
+              />
             </div>
 
             {/* close button */}

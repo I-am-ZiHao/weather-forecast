@@ -25,7 +25,7 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
     <>
       {/* modal for details */}
       <Modal title={data.date} show={showModal} onClose={onToggleModal}>
-        <div className="w-full h-full sm:px-8 sm:py-6 py-3">
+        <div className="w-full h-full sm:py-6 py-3">
           <DetailsChart data={data.hour} />
         </div>
       </Modal>
