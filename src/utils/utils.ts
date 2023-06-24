@@ -42,3 +42,12 @@ export const normalizeValue = (value: number, decimal?: number) =>
  */
 export const getTimeFromDateString = (date: string) =>
   date.slice(date.length - 5);
+
+/**
+ * @param timeStamp - timeStamp to be coverted, looks like 1687694400, unit is second
+ */
+export const convertTimestampToLocalTime = (timeStamp: number) => {
+  const hour = new Date(timeStamp * 1000).getHours().toString();
+  const hourStr = hour.length === 2 ? hour : `0${hour}`; // add '0' if it is before 10 am
+  return `${hourStr}:00`;
+};

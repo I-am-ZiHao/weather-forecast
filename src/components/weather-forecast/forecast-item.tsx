@@ -49,9 +49,9 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
 
         {/* mix & max temp */}
         <div className="w-max flex gap-3 items-center">
-          <PlainText content={normalizeValue(mintemp_c)} />
+          <PlainText content={`${normalizeValue(mintemp_c)}°`} />
           <StatusBar />
-          <PlainText content={normalizeValue(maxtemp_c)} />
+          <PlainText content={`${normalizeValue(maxtemp_c)}°`} />
         </div>
       </div>
     </>
