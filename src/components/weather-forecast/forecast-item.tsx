@@ -5,6 +5,7 @@ import { Label, PlainText } from "../UI-components/typography";
 import { normalizeValue } from "@/utils/utils";
 import WeatherIcon from "../UI-components/weather-icon";
 import Modal from "../UI-components/modal";
+import DetailsChart from "./details-chart";
 
 interface ForecastItemProps {
   data: ForecastDayDataType;
@@ -23,8 +24,10 @@ const ForecastItem = memo<ForecastItemProps>(({ data }) => {
   return (
     <>
       {/* modal for details */}
-      <Modal show={showModal} onClose={onToggleModal}>
-        {/* TODO: put chart here */}
+      <Modal title={data.date} show={showModal} onClose={onToggleModal}>
+        <div className="w-full h-full sm:px-8 sm:py-6 py-3">
+          <DetailsChart data={data.hour} />
+        </div>
       </Modal>
 
       {/* main content */}

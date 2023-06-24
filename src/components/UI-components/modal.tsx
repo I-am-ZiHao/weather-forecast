@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
+import { Title2 } from "./typography";
 
 interface ModalProps {
   id?: string;
+  title?: string;
   show: boolean;
   onClose: () => void;
   children?: ReactNode;
 }
 
-const Modal = ({ id, show, onClose, children }: ModalProps) => {
+const Modal = ({ id, title, show, onClose, children }: ModalProps) => {
   return (
     <>
       {/* modal overlay */}
@@ -21,9 +23,19 @@ const Modal = ({ id, show, onClose, children }: ModalProps) => {
         onClick={onClose}
       >
         {/* modal content */}
-        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full sm:max-w-[80%] max-w-[90%] h-full max-h-[80%] p-3 bg-gray-700 opacity-100 shadow-2xl rounded-lg flex flex-col">
-          {/* close button */}
-          <div className="w-full flex justify-end">
+        <div
+          className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full sm:max-w-[80%] max-w-[90%] h-full max-h-[80%] p-3 bg-gray-700 opacity-100 shadow-2xl rounded-lg flex flex-col"
+          // prevent the modal from being closed
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* header */}
+          <div className="w-full flex justify-between p-2">
+            {/* title */}
+            <div className="">
+              <Title2 content={title ?? ""} />
+            </div>
+
+            {/* close button */}
             <button
               type="button"
               className="text-gray-400 bg-transparent rounded-[50%] p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
@@ -34,7 +46,7 @@ const Modal = ({ id, show, onClose, children }: ModalProps) => {
             >
               <svg
                 aria-hidden="true"
-                className="sm:w-8 sm:h-8 w-5 h-5"
+                className="sm:w-6 sm:h-6 w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +61,7 @@ const Modal = ({ id, show, onClose, children }: ModalProps) => {
           </div>
 
           {/* content */}
-          <div className="w-full grow sm:px-8 px-4 sm:py-6 py-3">
-            {children}
-          </div>
+          <div className="w-full max-h-[calc(100%-48px)] grow">{children}</div>
         </div>
       </div>
     </>

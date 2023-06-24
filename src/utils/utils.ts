@@ -36,3 +36,9 @@ export const filterDataByHour = (hourData: HourDataType[]) => {
 // to certain decimal
 export const normalizeValue = (value: number, decimal?: number) =>
   value.toFixed(decimal || 1);
+
+/**
+ * @param date - date string to be normalized, looks like "2023-06-23 15:15"
+ */
+export const getTimeFromDateString = (date: string) =>
+  date.slice(date.length - 5);

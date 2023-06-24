@@ -3,7 +3,7 @@ import { memo } from "react";
 import { HighlightText, Label, PlainText } from "../UI-components/typography";
 import Skeleton from "../UI-components/skeleton";
 import { CommonProps } from "@/types/props";
-import { normalizeValue } from "@/utils/utils";
+import { getTimeFromDateString, normalizeValue } from "@/utils/utils";
 import WeatherIcon from "../UI-components/weather-icon";
 
 interface CurrentWeatherDetailsProps extends CommonProps {
@@ -27,7 +27,7 @@ const CurrentWeatherDetails = memo<CurrentWeatherDetailsProps>(
         {data.map((d) => (
           <div key={d.time} className="w-max flex flex-col items-center gap-2">
             {/* time looks like "2023-06-23 15:15" */}
-            <PlainText content={d.time.slice(d.time.length - 5)} />
+            <PlainText content={getTimeFromDateString(d.time)} />
 
             {/* icon & rain chance */}
             <div className="w-max flex flex-col items-center gap-1">
