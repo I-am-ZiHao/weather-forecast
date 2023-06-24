@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { CryFace } from "../../public/icons";
+import { CryFaceIcon } from "../../public/icons";
 
 interface ErrorMessageProps {
   message?: string;
@@ -9,7 +9,7 @@ interface ErrorMessageProps {
 const ErrorMessage = memo<ErrorMessageProps>(({ message }) => {
   return (
     <>
-      <CryFace />
+      <CryFaceIcon />
       {message || "No matching location found."}
     </>
   );

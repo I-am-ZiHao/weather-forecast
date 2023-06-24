@@ -1,8 +1,7 @@
+import { UIComponentProps } from "@/types/props";
 import { twMerge } from "tailwind-merge";
 
-interface SkeletonProps {
-  className?: string;
-}
+interface SkeletonProps extends UIComponentProps {}
 
 const Skeleton = ({ className }: SkeletonProps) => (
   <div

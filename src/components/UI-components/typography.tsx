@@ -1,10 +1,10 @@
+import { UIComponentProps } from "@/types/props";
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 
-type TypographyProps = {
+interface TypographyProps extends UIComponentProps {
   content: string | number;
-  className?: string;
-};
+}
 
 export const Title1 = memo(({ content, className }: TypographyProps) => (
   <text className={twMerge(`text-6xl ${className ?? ""}`)}>{content}</text>

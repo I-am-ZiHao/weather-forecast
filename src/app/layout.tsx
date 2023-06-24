@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/UI-components/scroll-to-top";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
@@ -38,7 +39,12 @@ export default function RootLayout({
         <nav className="fixed w-full top-0 left-0 bg-[#111319] shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px] z-10 p-5 text-white font-bold sm:text-3xl text-2xl animate-fadeInDown">
           <h1 className="whitespace-nowrap">Weather Forecast</h1>
         </nav>
+
+        {/* main content */}
         {children}
+
+        {/* scroll to top button */}
+        <ScrollToTop />
       </body>
     </html>
   );

@@ -23,7 +23,7 @@ const CurrentWeatherDetails = memo<CurrentWeatherDetailsProps>(
     if (!data) return null;
 
     return (
-      <div className="w-full max-w-full mt-4 overflow-x-auto no-scrollbar px-8 py-4 flex items-center justify-between gap-5 bg-[#34495E] rounded-lg animate-fadeInUp">
+      <div className="w-max max-w-full mt-4 overflow-x-auto no-scrollbar px-8 py-4 flex items-center justify-between gap-5 bg-[#34495E] rounded-lg animate-fadeInUp">
         {data.map((d) => (
           <div key={d.time} className="w-max flex flex-col items-center gap-2">
             {/* time looks like "2023-06-23 15:15" */}
