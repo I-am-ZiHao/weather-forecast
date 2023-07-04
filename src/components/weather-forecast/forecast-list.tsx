@@ -17,7 +17,7 @@ const ForecastList = memo<ForecastListProps>(({ data, isLoading }) => {
   return (
     <div className="w-full py-8 flex flex-col items-center gap-3 ">
       <div className="w-full animate-fadeInUp">
-        <Title2 content={`${FORECAST_DAY} days weather forecast`} />
+        <Title2 content={`${FORECAST_DAY - 1} days weather forecast`} />
       </div>
 
       {isLoading

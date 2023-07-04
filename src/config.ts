@@ -1,1 +1,1 @@
-export const FORECAST_DAY = 5;
+export const FORECAST_DAY = 3;
